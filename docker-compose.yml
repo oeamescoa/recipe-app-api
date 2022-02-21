@@ -1,5 +1,15 @@
 version: "3"
 
+# (CL) docker-compose build 
+# -- cmd will run this script and deploy all services with the "build" statement;
+# -- notice the ./app volume will be includes the Dockerfile which will be
+# -- compiled and the output files will be placed in the app/app directory
+
+# (CL) docker-compose run app sh -c "python manage.py tests && flake8"
+# -- runs the docker build in the app/app directory (the image);
+# -- calls the manage.py script passing in tests as paramters, this is
+# -- part of the Django framework; system will look for tests.py
+
 services:
   app:
     build:
@@ -7,6 +17,6 @@ services:
     ports:
       - "8000:8000" #links local system port 8000 to port 8000 on docker image running server
     volumes:
-      - ./app:/app #links local directory with file system on docker image
+      - ./app:/app #links local directory with file system on docker image (app/app)
     command: > # runs the server on the docker image
       sh -c "python manage.py runserver 0.0.0.0:8000" 
