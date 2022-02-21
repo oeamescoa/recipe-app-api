@@ -5,8 +5,8 @@ services:
     build:
       context: .
     ports:
-      - "8000:8000"
+      - "8000:8000" #links local system port 8000 to port 8000 on docker image running server
     volumes:
-      - ./app:/app
-    command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      - ./app:/app #links local directory with file system on docker image
+    command: > # runs the server on the docker image
+      sh -c "python manage.py runserver 0.0.0.0:8000" 
